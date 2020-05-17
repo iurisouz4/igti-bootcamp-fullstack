@@ -1,4 +1,4 @@
-#IGTI - Bootcamp Desenvolvedor Fullstack
+# IGTI - Bootcamp Desenvolvedor Fullstack
 
 Repositório de projetos, atividades e desafios feitos durante o bootcamp.
 
