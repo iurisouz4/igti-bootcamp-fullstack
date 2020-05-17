@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>IGTI - Módulo 01 - Trabalho Prático 01</title>
+  </head>
+  <body>
+    <h1>RGB</h1>
+    <div class="container">
+      <div class="texts">
+        <strong class="texts" style="color: red;">Vermelho (R)</strong>
+        <strong class="texts" style="color: lime;">Verde (G)</strong>
+        <strong class="texts" style="color: dodgerblue;">Azul (B)</strong>
+      </div>
+
+      <div>
+        <form>
+          <div class="row">
+            <input
+              id="RedSlider"
+              class="slider"
+              type="range"
+              max="255"
+              min="0"
+              value="0"
+            />
+            <input id="RedText" type="number" value="0" max="255" min="0" />
+          </div>
+          <div class="row">
+            <input
+              id="GreenSlider"
+              class="slider"
+              type="range"
+              max="255"
+              min="0"
+              value="0"
+            />
+            <input id="GreenText" type="number" value="0" max="255" min="0" />
+          </div>
+          <div class="row">
+            <input
+              id="BlueSlider"
+              class="slider"
+              type="range"
+              max="255"
+              min="0"
+              value="0"
+            />
+            <input id="BlueText" type="number" value="0" max="255" min="0" />
+          </div>
+        </form>
+      </div>
+      <div id="preview"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
