@@ -1,0 +1,18 @@
+.section {
+  background-color: #00afa2;
+}
+
+button {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+#title,
+#subtitle {
+  color: white;
+}
+
+.card {
+  margin-bottom: 10px;
+  height: 7em;
+}
