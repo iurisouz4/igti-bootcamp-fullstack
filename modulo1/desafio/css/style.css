@@ -1,0 +1,20 @@
+.section {
+  background-color: #00afa2;
+}
+#sectionTitle {
+  background-color: #ffffff;
+}
+
+.columns {
+  width: 130%;
+}
+
+#title,
+#subtitle {
+  color: white;
+}
+
+.card {
+  margin-bottom: 10px;
+  height: 7em;
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Módulo 1- Desafio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" type="text/css" />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 id="title" class="title">
+          Módulo 1 - Desafio
+        </h1>
+        <p id="subtitle" class="subtitle">IGTI - Bootcamp Fullstack</p>
+      </div>
+    </section>
+    <section class="section" id="sectionTitle">
+      <div class="container">
+        <h1 class="title is-1">
+          Pesquisa de usuários
+        </h1>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <input
+            class="input is-large"
+            type="text"
+            id="search-input"
+            placeholder="Digite o nome de um usuário..."
+          />
+        </div>
+        <div class="column">
+          <button
+            class="button is-primary is-large"
+            id="search-button"
+            disabled
+          >
+            Buscar
+          </button>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column">
+          <div class="column" id="list-users">
+            <h2 class="title is-2">Nenhum usuário filtrado</h2>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column" id="list-stats">
+            <h2 class="title is-2">Nada a ser exibido</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>

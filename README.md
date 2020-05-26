@@ -6,12 +6,16 @@ Repositório de projetos, atividades e desafios feitos durante o bootcamp.
 
 ## Módulo1
 
-### Prática 1
+### Prática
 
-[![pratica1](pratica1.png)](https://iurisouz4.github.io/igti-bootcamp-fullstack/modulo1/modulo1-pratica1/)
+[![pratica1](./assets/modulo1-pratica.png)](https://iurisouz4.github.io/igti-bootcamp-fullstack/modulo1/pratica/)
 
 ### Aula 17
 
-[![aula17](aula17.png)](https://iurisouz4.github.io/igti-bootcamp-fullstack/modulo1/modulo1-aula17/)
+[![aula17](./assets/modulo1-aula17.png)](https://iurisouz4.github.io/igti-bootcamp-fullstack/modulo1/aula17/)
 
-[![logo](logo.png "IGTI")](https://www.igti.com.br/custom/bootcamp-desenvolvedor-full-stack/)
+### Desafio
+
+[![desafio](./assets/modulo1-desafio.png)](https://iurisouz4.github.io/igti-bootcamp-fullstack/modulo1/desafio/)
+
+[![logo](./assets/logo.png "IGTI")](https://www.igti.com.br/custom/bootcamp-desenvolvedor-full-stack/)
