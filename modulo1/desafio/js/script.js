@@ -46,43 +46,48 @@ function search() {
     })
     .sort((a, b) => a.name.localeCompare(b.name));
 
-  usersList.innerHTML = "";
-  let userlisthtml = `<h2 class="title is-2">${filtered.length} usuário(s) encontrado(s)</h2>`;
-  filtered.forEach((user) => {
-    userlisthtml += `<div class="box">
-    <article class="media">
-      <div class="media-left">
-        <figure class="image is-64x64">
-          <img
-            class="is-rounded"
-            src="${user.avatar}"
-            alt="Image"
-          />
-        </figure>
-      </div>
-      <div class="media-content">
-        <div class="content">
-          <p>
-            <strong>${user.name}</strong>
-            <br />
-            ${user.age} anos
-          </p>
-        </div>
-      </div>
-    </article>
-  </div>`;
-  });
-  usersList.innerHTML = userlisthtml;
+  if (filtered.length > 0) {
+    usersList.innerHTML = "";
+    let userlisthtml = `<h2 class="title is-2">${filtered.length} usuário(s) encontrado(s)</h2>`;
+    filtered.forEach((user) => {
+      userlisthtml += `<div class="box">
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <img
+                  class="is-rounded"
+                  src="${user.avatar}"
+                  alt="Image"
+                />
+              </figure>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong>${user.name}</strong>
+                  <br />
+                  ${user.age} anos
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>`;
+    });
+    usersList.innerHTML = userlisthtml;
 
-  // calculate stats
-  const totalMale = filtered.filter((user) => user.gender === "male").length;
-  const totalFemale = filtered.filter((user) => user.gender === "female")
-    .length;
-  const sumAge = filtered.reduce((acm, user) => acm + user.age, 0);
-  const averageAge = (sumAge / filtered.length || 0).toFixed(2);
-  statsList.innerHTML = `<h2 class="title is-2">Estatísticas</h2>
-  <h2>Sexo masculino: <strong>${totalMale}</strong></h2>
-  <h2>Sexo feminino: <strong>${totalFemale}</strong></h2>
-  <h2>Soma das idades: <strong>${sumAge}</strong></h2>
-  <h2>Média das idades: <strong>${averageAge}</strong></h2>`;
+    // calculate stats
+    const totalMale = filtered.filter((user) => user.gender === "male").length;
+    const totalFemale = filtered.filter((user) => user.gender === "female")
+      .length;
+    const sumAge = filtered.reduce((acm, user) => acm + user.age, 0);
+    const averageAge = (sumAge / filtered.length || 0).toFixed(2);
+    statsList.innerHTML = `<h2 class="title is-2">Estatísticas</h2>
+        <h2>Sexo masculino: <strong>${totalMale}</strong></h2>
+        <h2>Sexo feminino: <strong>${totalFemale}</strong></h2>
+        <h2>Soma das idades: <strong>${sumAge}</strong></h2>
+        <h2>Média das idades: <strong>${averageAge}</strong></h2>`;
+  } else {
+    usersList.innerHTML = '<h2 class="title is-2">Nenhum usuário filtrado</h2>';
+    statsList.innerHTML = '<h2 class="title is-2">Nada a ser exibido</h2>';
+  }
 }
