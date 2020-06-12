@@ -54,6 +54,45 @@ async function deleteGrade(id) {
   return { msg: "Grade excluída..." };
 }
 
+async function getTotal(student, subject) {
+  const json = await fs.readFile(gradesFile, "utf8");
+  const data = JSON.parse(json);
+  const filteredGrades = data.grades.filter((grade) => {
+    return grade.student == student && grade.subject == subject;
+  });
+  const total = filteredGrades.reduce((acum, curr) => {
+    return acum + curr.value;
+  }, 0);
+  return total;
+}
+
+async function getAverage(type, subject) {
+  const json = await fs.readFile(gradesFile, "utf8");
+  const data = JSON.parse(json);
+  const filteredGrades = data.grades.filter((grade) => {
+    return grade.type == type && grade.subject == subject;
+  });
+  const total = filteredGrades.reduce((acum, curr) => {
+    return acum + curr.value;
+  }, 0);
+  const average = total / filteredGrades.length;
+  return average;
+}
+
+async function getTop3(type, subject) {
+  const json = await fs.readFile(gradesFile, "utf8");
+  const data = JSON.parse(json);
+  const filteredGrades = data.grades.filter((grade) => {
+    return grade.type == type && grade.subject == subject;
+  });
+
+  const sortedGrades = filteredGrades.sort((a, b) => {
+    return b.value - a.value;
+  });
+
+  return sortedGrades.slice(0, 3);
+}
+
 app.use(express.json());
 
 app.get("/grades/:id", async (req, res) => {
@@ -76,6 +115,32 @@ app.put("/grades/:id", async (req, res) => {
 app.delete("/grades", async (req, res) => {
   const data = await deleteGrade(req.body.id);
   return res.json(data);
+});
+
+app.get("/total", async (req, res) => {
+  const total = await getTotal(req.body.student, req.body.subject);
+  return res.json({
+    value: total,
+    msg:
+      "Soma de todas as notas de atividades correspondentes à " +
+      req.body.subject,
+  });
+});
+
+app.get("/average", async (req, res) => {
+  const average = await getAverage(req.body.type, req.body.subject);
+  return res.json({
+    value: average,
+    msg: `Média de todas as notas de ${req.body.type} correspondentes à ${req.body.subject}`,
+  });
+});
+
+app.get("/top3", async (req, res) => {
+  const top3 = await getTop3(req.body.type, req.body.subject);
+  return res.json({
+    values: top3,
+    msg: `3 melhores notas de ${req.body.type} correspondentes à ${req.body.subject}`,
+  });
 });
 
 app.listen(port, () => {
