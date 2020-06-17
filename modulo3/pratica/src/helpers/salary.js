@@ -103,4 +103,8 @@ function calculateSalaryFrom(fullSalary) {
   };
 }
 
-export { calculateSalaryFrom };
+function calculatePercentage(baseValue, value) {
+  return ((value * 100) / baseValue).toFixed(2);
+}
+
+export { calculateSalaryFrom, calculatePercentage };

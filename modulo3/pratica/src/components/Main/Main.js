@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import SalaryBar from "../SalaryBar/SalaryBar";
-import { calculateSalaryFrom } from "../../helpers/salary";
+import { calculateSalaryFrom, calculatePercentage } from "../../helpers/salary";
 
 export default function Main() {
+  const formatter = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
   const [bruteSalary, setBruteSalary] = useState(1000);
   const [baseINSS, setBaseINSS] = useState(calculateSalaryFrom(1000).baseINSS);
   const [baseIRPF, setBaseIRPF] = useState(calculateSalaryFrom(1000).baseIRPF);
@@ -16,20 +21,35 @@ export default function Main() {
 
   function handleChangeFullSalary(event) {
     const value = event.target.value;
+    const {
+      baseINSS,
+      baseIRPF,
+      discountINSS,
+      discountIRPF,
+      netSalary,
+    } = calculateSalaryFrom(event.target.value);
+
     setBruteSalary(value);
-    setBaseINSS(calculateSalaryFrom(value).baseINSS);
-    setBaseIRPF(calculateSalaryFrom(value).baseIRPF);
-    setDiscountINSS(calculateSalaryFrom(value).discountINSS);
-    setDiscountIRPF(calculateSalaryFrom(value).discountIRPF);
-    setSalary(calculateSalaryFrom(value).netSalary);
+    setBaseINSS(baseINSS);
+    setBaseIRPF(baseIRPF);
+    setDiscountINSS(discountINSS);
+    setDiscountIRPF(discountIRPF);
+    setSalary(netSalary);
   }
 
   return (
-    <>
-      <h1>React Salário</h1>
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s8">
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <h1>Calcular Salário</h1>
+      <form className="col">
+        <div className="row">
+          <div className="input-field col s12">
             <input
               id="salary_brute"
               type="number"
@@ -37,45 +57,99 @@ export default function Main() {
               min={0}
               onChange={handleChangeFullSalary}
             />
-            <label for="salary_brute">Salário Bruto:</label>
+            <label>Salário Bruto:</label>
           </div>
         </div>
-        <div class="row">
-          <div class="input-field col s2">
-            <input id="base_inss" type="text" value={baseINSS} min={0} />
-            <label for="base_inss">Base INSS:</label>
+        <div className="row">
+          <div className="input-field col s3">
+            <input
+              id="base_inss"
+              type="text"
+              value={formatter.format(baseINSS)}
+              min={0}
+              readOnly
+              style={{ fontWeight: "bold" }}
+            />
+            <label>Base INSS:</label>
           </div>
-          <div class="input-field col s2">
+          <div className="input-field col s3">
             <input
               id="discount_inss"
               type="text"
-              value={discountINSS}
+              value={`${formatter.format(discountINSS)} (${calculatePercentage(
+                bruteSalary,
+                discountINSS
+              )}%)`}
               min={0}
+              readOnly
+              style={{ color: "#e67e22", fontWeight: "bold" }}
             />
-            <label for="discount_inss">Desconto INSS:</label>
+            <label>Desconto INSS:</label>
           </div>
-          <div class="input-field col s2">
-            <input id="base_irpf" type="text" value={baseIRPF} min={0} />
-            <label for="base_irpf">Base IRPF:</label>
+          <div className="input-field col s3">
+            <input
+              id="base_irpf"
+              type="text"
+              value={formatter.format(baseIRPF)}
+              min={0}
+              readOnly
+              style={{ fontWeight: "bold" }}
+            />
+            <label>Base IRPF:</label>
           </div>
-          <div class="input-field col s2">
+          <div className="input-field col s3">
             <input
               id="discount_irpf"
               type="text"
-              value={discountIRPF}
+              value={`${formatter.format(discountIRPF)} (${calculatePercentage(
+                bruteSalary,
+                discountIRPF
+              )}%)`}
               min={0}
+              readOnly
+              style={{ color: "#c0392b", fontWeight: "bold" }}
             />
-            <label for="discount_irpf">Desconto IRPF:</label>
+            <label>Desconto IRPF:</label>
           </div>
         </div>
-        <div class="row">
-          <div class="input-field col s2">
-            <input id="salary" type="text" value={salary} min={0} />
-            <label for="salary">Salário Líquido:</label>
+        <div className="row">
+          <div className="input-field col s3">
+            <input
+              id="salary"
+              type="text"
+              value={`${formatter.format(salary)} (${calculatePercentage(
+                bruteSalary,
+                salary
+              )}%)`}
+              min={0}
+              readOnly
+              style={{ color: "#16a085", fontWeight: "bold" }}
+            />
+            <label>Salário Líquido:</label>
           </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <SalaryBar
+            value={calculatePercentage(bruteSalary, discountINSS)}
+            color="#e67e22"
+          />
+          <SalaryBar
+            value={calculatePercentage(bruteSalary, discountIRPF)}
+            color="#c0392b"
+          />
+          <SalaryBar
+            value={calculatePercentage(bruteSalary, salary)}
+            color="#16a085"
+          />
         </div>
       </form>
-      <SalaryBar discountIRPF={""} discountINSS={""} salary={""} />
-    </>
+    </div>
   );
 }
